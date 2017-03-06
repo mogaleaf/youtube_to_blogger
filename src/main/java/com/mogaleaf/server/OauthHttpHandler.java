@@ -29,14 +29,14 @@ public class OauthHttpHandler implements HttpHandler {
             requestCredentials(httpExchange, id, flow);
         } else {
             if (code != null) {
-                requestCode(httpExchange,id, code, flow);
+                requestCode(id, code, flow);
             }
             HttpUtils.redirectTo(Configuration.CONNECTED_HANDLER + id, httpExchange);
         }
     }
 
 
-    private void requestCode(HttpExchange httpExchange,String id, String code, GoogleAuthorizationCodeFlow flow) throws IOException {
+    private void requestCode(String id, String code, GoogleAuthorizationCodeFlow flow) throws IOException {
         GoogleAuthorizationCodeTokenRequest googleAuthorizationCodeTokenRequest = flow.newTokenRequest(code);
         googleAuthorizationCodeTokenRequest.setRedirectUri(Configuration.CONNECT_URI + id);
         GoogleTokenResponse execute = googleAuthorizationCodeTokenRequest.execute();
