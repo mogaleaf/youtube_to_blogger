@@ -26,8 +26,8 @@ public class Configuration {
 
     public static String ID = "cecile";
 
-    public static final String CONNECT_URI = "/connect?id=";
-    public static final String CONNECTED_HANDLER = "/work?id=";
+    public static final String CONNECT_URI =  System.getenv("SERVER") + "/connect?id=";
+    public static final String CONNECTED_HANDLER = System.getenv("SERVER") + "/work?id=";
 
     public static final String SCOPE_YOUTUBE = "https://www.googleapis.com/auth/youtube";
     public static final String SCOPE_BLOGGER = "https://www.googleapis.com/auth/blogger";
