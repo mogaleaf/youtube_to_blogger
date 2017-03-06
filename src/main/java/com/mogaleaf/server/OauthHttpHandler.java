@@ -29,16 +29,16 @@ public class OauthHttpHandler implements HttpHandler {
             requestCredentials(httpExchange, id, flow);
         } else {
             if (code != null) {
-                requestCode(id, code, flow);
+                requestCode(httpExchange,id, code, flow);
             }
             HttpUtils.redirectTo(Configuration.CONNECTED_HANDLER + id, httpExchange);
         }
     }
 
 
-    private void requestCode(String id, String code, GoogleAuthorizationCodeFlow flow) throws IOException {
+    private void requestCode(HttpExchange httpExchange,String id, String code, GoogleAuthorizationCodeFlow flow) throws IOException {
         GoogleAuthorizationCodeTokenRequest googleAuthorizationCodeTokenRequest = flow.newTokenRequest(code);
-        googleAuthorizationCodeTokenRequest.setRedirectUri(Configuration.CONNECT_URI + id);
+        googleAuthorizationCodeTokenRequest.setRedirectUri(httpExchange.getHttpContext().getServer().getAddress() +Configuration.CONNECT_URI + id);
         GoogleTokenResponse execute = googleAuthorizationCodeTokenRequest.execute();
         flow.createAndStoreCredential(execute, id);
 
@@ -46,7 +46,7 @@ public class OauthHttpHandler implements HttpHandler {
 
     private void requestCredentials(HttpExchange httpExchange, String id, GoogleAuthorizationCodeFlow flow) throws IOException {
         AuthorizationCodeRequestUrl authorizationCodeRequestUrl = flow.newAuthorizationUrl();
-        authorizationCodeRequestUrl.setRedirectUri(Configuration.CONNECT_URI + id);
+        authorizationCodeRequestUrl.setRedirectUri(httpExchange.getHttpContext().getServer().getAddress() + Configuration.CONNECT_URI + id);
         String url = authorizationCodeRequestUrl.toURL().toString();
         httpExchange.getResponseHeaders().put("Content-Type", Arrays.asList("text/html"));
         HttpUtils.redirectTo(url, httpExchange);
