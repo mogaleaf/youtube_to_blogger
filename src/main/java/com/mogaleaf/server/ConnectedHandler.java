@@ -20,6 +20,11 @@ public class ConnectedHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
         try {
+            String fin = "fin";
+            httpExchange.sendResponseHeaders(200, fin.length());
+            OutputStream responseBody = httpExchange.getResponseBody();
+            responseBody.write(fin.getBytes());
+            responseBody.close();
             Map<String, String> queryMap = HttpUtils.queryToMap(httpExchange.getRequestURI().getQuery());
             String id = queryMap.get(Configuration.ID_PARAM);
             if (id == null) {
@@ -35,11 +40,7 @@ public class ConnectedHandler implements HttpHandler {
             List<YouTubeOwnVideo> youTubeOwnVideos = retrieveYoutube(youtube);
             postOnBlogger(credential, youTubeOwnVideos);
             deleteVideosDescription(youtube, youTubeOwnVideos);
-            String fin = "fin";
-            httpExchange.sendResponseHeaders(200, fin.length());
-            OutputStream responseBody = httpExchange.getResponseBody();
-            responseBody.write(fin.getBytes());
-            responseBody.close();
+
         }catch(Exception e){
             e.printStackTrace();
         }
