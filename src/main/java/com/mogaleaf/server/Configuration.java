@@ -12,8 +12,8 @@ import java.io.IOException;
 public class Configuration {
 
 
-    public static String Client_Id = "468001009371-mtgdp8msgu6vl9oif8fc2rbo412ulp99.apps.googleusercontent.com";
-    public static String Client_Secret = "IzvL_w8X0Zg_oFiq8d_eTv7R";
+    public static String Client_Id = System.getenv("ClientId");
+    public static String Client_Secret = System.getenv("ClientSecret");
     /**
      * Global instance of the HTTP transport.
      */
@@ -26,8 +26,8 @@ public class Configuration {
 
     public static String ID = "cecile";
 
-    public static final String CONNECT_URI =  System.getenv("SERVER") + "/connect?id=";
-    public static final String CONNECTED_HANDLER = System.getenv("SERVER") + "/work?id=";
+    public static final String CONNECT_URI =  System.getenv("SERVER") + "connect?id=";
+    public static final String CONNECTED_HANDLER = System.getenv("SERVER") + "work?id=";
 
     public static final String SCOPE_YOUTUBE = "https://www.googleapis.com/auth/youtube";
     public static final String SCOPE_BLOGGER = "https://www.googleapis.com/auth/blogger";
