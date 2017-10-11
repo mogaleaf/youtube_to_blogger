@@ -3,10 +3,7 @@ package com.mogaleaf.server;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.client.util.store.FileDataStoreFactory;
-
-import java.io.File;
-import java.io.IOException;
+import com.google.api.client.util.store.DataStoreFactory;
 
 // TODO propertie file
 public class Configuration {
@@ -32,7 +29,7 @@ public class Configuration {
     public static final String SCOPE_YOUTUBE = "https://www.googleapis.com/auth/youtube";
     public static final String SCOPE_BLOGGER = "https://www.googleapis.com/auth/blogger";
 
-    public static FileDataStoreFactory DATA_STORE_FACTORY;
+    public static DataStoreFactory DATA_STORE_FACTORY;
 
 
 
@@ -44,4 +41,7 @@ public class Configuration {
     public static String BLOG_ID = "29009291853583329";
 
     public static String KEYWORD_DESCRIPTION = "#BLOG";
+
+    public static final String  REDIS_PORT = System.getenv("REDIS_PORT");
+    public static final String REDIS_HOST = System.getenv("REDIS_HOST");
 }
