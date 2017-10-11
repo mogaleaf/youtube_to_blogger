@@ -27,7 +27,7 @@ public class Main {
                     redisURI.getPort(),
                     Protocol.DEFAULT_TIMEOUT,
                     redisURI.getUserInfo().split(":",2)[1]);
-            RedisDatastoreFactory redisDatastoreFactory = new RedisDatastoreFactory(pool.getResource());
+            RedisDatastoreFactory redisDatastoreFactory = new RedisDatastoreFactory(pool);
             Configuration.DATA_STORE_FACTORY = redisDatastoreFactory;
             new OAuthHttpServer().start();
 
