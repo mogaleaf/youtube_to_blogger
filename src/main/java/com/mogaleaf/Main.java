@@ -16,7 +16,8 @@ public class Main {
     public static void main(String args[]) {
         Logger.getLogger("APPBLOG").info("STARTING");
         try {
-            Jedis jedis = new Jedis(Configuration.REDIS_HOST,Integer.valueOf(Configuration.REDIS_PORT));
+           // Jedis jedis = new Jedis(Configuration.REDIS_HOST,Integer.valueOf(Configuration.REDIS_PORT));
+            Jedis jedis = new Jedis(Configuration.REDIS_HOST);
             RedisDatastoreFactory redisDatastoreFactory = new RedisDatastoreFactory(jedis);
             Configuration.DATA_STORE_FACTORY = redisDatastoreFactory;
             new OAuthHttpServer().start();
