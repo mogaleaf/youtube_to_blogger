@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class RedisDataStore implements DataStore<StoredCredential> {
@@ -77,12 +78,18 @@ public class RedisDataStore implements DataStore<StoredCredential> {
 	}
 
 	private StoredCredential getStoredCredential(String hget) {
-		String[] split = hget.split(",");
-		StoredCredential storedCredential = new StoredCredential();
-		storedCredential.setAccessToken(split[0]);
-		storedCredential.setRefreshToken(split[1]);
-		storedCredential.setExpirationTimeMilliseconds(Long.valueOf(split[2]));
-		return storedCredential;
+		try {
+			String[] split = hget.split(",");
+			StoredCredential storedCredential = new StoredCredential();
+			storedCredential.setAccessToken(split[0]);
+			storedCredential.setRefreshToken(split[1]);
+			storedCredential.setExpirationTimeMilliseconds(Long.valueOf(split[2]));
+			return storedCredential;
+		}catch(Exception e){
+			Logger.getLogger("APPBLOG").severe(e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
