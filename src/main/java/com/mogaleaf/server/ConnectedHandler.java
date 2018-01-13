@@ -86,7 +86,7 @@ public class ConnectedHandler implements HttpHandler {
     }
 
     private String retrieveHtmlContent(YouTubeOwnVideo video) {
-        return "<iframe width=\"640\" height=\"360\" src=\"https://www.youtube.com/embed/" + video.id + "?rel=0&amp;controls=0&amp;showinfo=0\" frameborder=\"0\" allowfullscreen></iframe>";
+        return "<iframe width=\"840\" height=\"472\" src=\"https://www.youtube.com/embed/" + video.id + "?rel=0&amp;controls=0&amp;showinfo=0\" frameborder=\"0\" allowfullscreen></iframe>";
     }
 
     private List<YouTubeOwnVideo> retrieveYoutube(YouTube youtube) throws IOException {
